@@ -67,5 +67,11 @@ public class SubjectsServiceImpl implements SubjectsService {
     private boolean subjectIDExists(String subjectID) {
         return subjectsRepository.existsBySubjectID(subjectID);
     }
+
+    @Override
+    public List<Subjects> saveSubjects(List<Subjects> subjects) {
+        // Implement your logic to save subjects to the database
+        return subjectsRepository.saveAll(subjects);
+    }
 }
 
