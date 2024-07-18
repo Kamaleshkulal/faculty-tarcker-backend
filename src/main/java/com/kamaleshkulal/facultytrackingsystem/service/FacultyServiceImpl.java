@@ -59,6 +59,14 @@ public class FacultyServiceImpl implements  FacultyService{
         return facultyRepository.findAll();
     }
 
+    @Override
+    public void updateFaculty(Faculty faculty) {
+        if (faculty.getFacultyName() == null || faculty.getFacultyName().isEmpty()) {
+            throw new IllegalArgumentException("Faculty name must not be null or empty");
+        }
+        // Proceed with update logic
+        facultyRepository.save(faculty);
+    }
 
     @Override
     public Faculty updateFaculty(String facultyId, Faculty facultyDetails) {

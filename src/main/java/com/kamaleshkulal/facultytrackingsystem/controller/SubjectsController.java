@@ -103,8 +103,15 @@ public class SubjectsController {
     }
 
     @DeleteMapping("/{subjectId}")
-    public void deleteSubject(@PathVariable String subjectId) {
-        subjectsService.deleteSubject(subjectId);
+    public ResponseEntity<?> deleteSubjectById(@PathVariable String subjectId) {
+        try {
+            // Call yo
+            // Suur service method to delete the subject
+            subjectsService.deleteSubjectById(subjectId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete subject: " + e.getMessage());
+        }
     }
 
     @GetMapping("/all")

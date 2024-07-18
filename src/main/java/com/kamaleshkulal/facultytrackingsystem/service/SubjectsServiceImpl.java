@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -31,6 +32,7 @@ public class SubjectsServiceImpl implements SubjectsService {
         return subjectsRepository.findById(subjectId).orElse(null);
     }
 
+
     @Override
     public Subjects updateSubject(String subjectId, Subjects subjectDetails) {
         Subjects subject = subjectsRepository.findById(subjectId).orElse(null);
@@ -40,6 +42,22 @@ public class SubjectsServiceImpl implements SubjectsService {
             return subjectsRepository.save(subject);
         }
         return null;
+    }
+    @Override
+    public void deleteSubjectById(String subjectId) {
+        // Find subject by ID
+        Optional<Subjects> optionalSubject = subjectsRepository.findById(subjectId);
+
+        if (optionalSubject.isPresent()) {
+            Subjects subject = optionalSubject.get();
+            // Perform any necessary business logic before deletion
+
+            // Delete subject from repository
+            subjectsRepository.delete(subject);
+        } else {
+            // Handle case where subject with given ID does not exist
+            throw new IllegalArgumentException("Subject with ID " + subjectId + " not found");
+        }
     }
 
     @Override

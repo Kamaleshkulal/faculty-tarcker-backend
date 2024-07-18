@@ -17,4 +17,5 @@ public interface FacultyService {
     boolean existsById(String facultyId);
     Faculty findByFacultyEmail(String facultyEmail);
     Faculty findByFacultyPhoneNumber(String facultyPhoneNumber);
+    void updateFaculty(Faculty faculty);
 }

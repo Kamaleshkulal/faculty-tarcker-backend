@@ -11,4 +11,5 @@ public interface SubjectsService {
     List<Subjects> getAllSubjects();
     String generateUniqueSubjectID(String subjectName);
     List<Subjects> saveSubjects(List<Subjects> subjects);
+    void deleteSubjectById(String subjectId);
 }
