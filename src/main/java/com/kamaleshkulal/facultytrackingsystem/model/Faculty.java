@@ -1,11 +1,9 @@
 package com.kamaleshkulal.facultytrackingsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Entity
 public class Faculty {
@@ -36,7 +34,7 @@ public class Faculty {
     private int subjectsCount;
     private double passRate;
     private double failRate;
-    private int rating;
+    private double rating;
     private String status;
     private double attendance;
 
@@ -45,59 +43,13 @@ public class Faculty {
     @JsonBackReference
     private College college;
 
-
-    @Transient
-    public String getCollegeId() {
-        return college != null ? college.getCollegeID() : null;
-    }
-
-    @Transient
-    public String getCollegeName() {
-        return college != null ? college.getCollegeName() : null;
-    }
-
-    @Transient
-    public String getCollegeLogo() {
-        return college != null ? college.getCollegeLogo() : null;
-    }
-    @Transient
-    public String getCity() {
-        return college != null ? college.getCity() : null;
-    }
-    @Transient
-    public String getZipcode() {
-        return  college != null ? college.getZipcode() : null;
-    }
-    @Transient
-    public  String getState() {
-        return college != null ? college.getState() : null;
-    }
-    @Transient
-    public String getAddress(){
-        return college != null ? college.getAddress() : null;
-    }
-
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Subjects> subjects = new ArrayList<>();
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ResearchProjects> researchProjects = new ArrayList<>();
 
-    public List<ResearchProjects> getResearchProjects() {
-        return researchProjects;
-    }
-
-    public void setResearchProjects(List<ResearchProjects> researchProjects) {
-        this.researchProjects = researchProjects;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
+    // Getters and Setters
 
     public String getFacultyID() {
         return facultyID;
@@ -251,12 +203,20 @@ public class Faculty {
         this.failRate = failRate;
     }
 
-    public int getRating() {
-        return rating;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(double attendance) {
+        this.attendance = attendance;
     }
 
     public College getCollege() {
@@ -275,19 +235,65 @@ public class Faculty {
         this.subjects = subjects;
     }
 
-    public String getStatus() {
-        return status;
+    public List<ResearchProjects> getResearchProjects() {
+        return researchProjects;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setResearchProjects(List<ResearchProjects> researchProjects) {
+        this.researchProjects = researchProjects;
     }
 
-    public double getAttendance() {
-        return attendance;
+    // Transient methods for college details
+    @Transient
+    public String getCollegeId() {
+        return college != null ? college.getCollegeID() : null;
     }
 
-    public void setAttendance(double attendance) {
-        this.attendance = attendance;
+    @Transient
+    public String getCollegeName() {
+        return college != null ? college.getCollegeName() : null;
+    }
+
+    @Transient
+    public String getCollegeLogo() {
+        return college != null ? college.getCollegeLogo() : null;
+    }
+
+    @Transient
+    public String getCity() {
+        return college != null ? college.getCity() : null;
+    }
+
+    @Transient
+    public String getZipcode() {
+        return college != null ? college.getZipcode() : null;
+    }
+
+    @Transient
+    public String getState() {
+        return college != null ? college.getState() : null;
+    }
+
+    @Transient
+    public String getAddress() {
+        return college != null ? college.getAddress() : null;
+    }
+
+    // Standard getters and setters
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }
